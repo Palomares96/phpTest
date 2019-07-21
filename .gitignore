@@ -6,9 +6,13 @@
 /.vagrant
 .env
 .phpunit.result.cache
+aliases
+after.sh
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env.backup
 package-lock.json
+composer.lock
+.editorconfig
