@@ -16,7 +16,7 @@ class Project extends Model
 
     protected $table = 'projects';
 
-    public function project()
+    public function users()
     {
         return $this->belongsToMany('App\User', 'project_user', 'project_id', 'user_id')
             ->as('assigned')
