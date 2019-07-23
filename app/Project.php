@@ -19,8 +19,7 @@ class Project extends Model
     public function users()
     {
         return $this->belongsToMany('App\User', 'project_user', 'project_id', 'user_id')
-            ->as('assigned')
-            ->withPivot('active')
+            ->withPivot('currentlyAssigned')
             ->withTimestamps();
     }
 }

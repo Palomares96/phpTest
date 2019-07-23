@@ -19,3 +19,15 @@ use Illuminate\Http\Request;
 Route::get('users', 'UserController@listUsers');
 Route::get('users/active', 'UserController@listActiveUsers');
 Route::get('users/{user}', 'UserController@findUser');
+Route::get('users/{user}/projects', 'UserController@findProjectsUser');
+Route::post('users', 'UserController@addUser');
+Route::put('users/{user}', 'UserController@updateUserInfo');
+Route::delete('users/{user}', 'UserController@deleteUser');
+
+Route::get('projects', 'ProjectController@listProjects');
+Route::get('projects/active', 'ProjectController@listActiveProjects');
+Route::get('projects/{project}', 'ProjectController@findProject');
+Route::get('projects/{project}/users', 'ProjectController@findUsersProject');
+Route::post('projects', 'ProjectController@addProject');
+Route::put('projects/{project}', 'ProjectController@updateProjectInfo');
+Route::delete('projects/{project}', 'ProjectController@deleteProject');

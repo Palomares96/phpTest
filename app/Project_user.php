@@ -9,7 +9,7 @@ class Project_user extends Model
     protected $fillable = [
         'user_id',
         'project_id',
-        'active'
+        'currentlyAssigned'
     ];
 
     protected $table = 'project_user';

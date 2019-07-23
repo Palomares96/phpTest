@@ -21,7 +21,8 @@ class User extends JsonResource
             'active' => $this->active,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'self' => url("/api/users/{$this->id}")
+            'self' => url("/api/users/{$this->id}"),
+            'projects' => url("api/users/{$this->id}/projects"),
         ];
     }
 }
