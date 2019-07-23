@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Project extends Model
 {
+    use Sortable;
     //
     protected $fillable = [
         'name',
@@ -15,6 +17,10 @@ class Project extends Model
     ];
 
     protected $table = 'projects';
+
+    public $sortable = [
+        'id', 'name', 'desc', 'deadline', 'created_at', 'updated_at', 'active'
+    ];
 
     public function users()
     {

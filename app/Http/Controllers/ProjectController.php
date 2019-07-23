@@ -9,6 +9,138 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $projects = Project::sortable()->paginate(10);
+
+        return view('projects.index', compact('projects'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('projects.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $request->validate(
+            [
+                'name' => 'required|unique:projects|string',
+                'desc' => 'required|string',
+                'deadline' => 'required|date|after:today'
+            ]
+        );
+
+        $project = new Project(
+            [
+                'name' => $request->name,
+                'desc' => $request->desc,
+                'deadline' => $request->deadline,
+                'active' => true
+            ]
+        );
+
+        try {
+            $project->save();
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage, 500);
+        }
+
+        return redirect('/projects')->with('success', 'Project saved!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $project = Project::find($id);
+        return view('projects.edit', compact('project'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->active = $request->has('active');
+        echo $request->active;
+        $request->validate(
+            [
+                'name' => 'required|string',
+                'desc' => 'required|string',
+                'deadline' => 'required|date|after:today'
+            ]
+        );
+
+        $project = Project::find($id);
+        if (!$project) {
+            return response()->json(['message' => 'Project not found'], 404);
+        }
+
+        $project->name = $request->name;
+        $project->desc = $request->desc;
+        $project->deadline = $request->deadline;
+        $project->active = $request->active;
+
+        try {
+            $project->save();
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage, 500);
+        }
+        return redirect('/projects')->with('success', 'Project updated!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+        $project = Project::find($id);
+        $project->delete();
+
+        return redirect('/projects')->with('success', 'Project successfully disabled!');
+    }
+
     //
     public function listProjects()
     {
