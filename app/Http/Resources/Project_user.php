@@ -14,6 +14,17 @@ class Project_user extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'desc' => $this->desc,
+            'deadline' => $this->deadline,
+            'active' => $this->active,
+            'currentlyAssigned' => $this->pivot->currentlyAssigned,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'self' => url("/api/projects/{$this->id}"),
+            'users' => url("/api/projects/{$this->id}/users")
+        ];
     }
 }

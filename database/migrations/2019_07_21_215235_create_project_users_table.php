@@ -19,7 +19,7 @@ class CreateProjectUsersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('project_id')->unsigned()->nullable();
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->boolean('active');
+            $table->boolean('currentlyAssigned');
             $table->timestamps();
         });
     }
