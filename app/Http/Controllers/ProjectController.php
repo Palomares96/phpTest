@@ -138,7 +138,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $project->delete();
 
-        return redirect('/projects')->with('success', 'Project successfully disabled!');
+        return redirect('/projects')->with('success', 'Project successfully deleted!');
     }
 
     //

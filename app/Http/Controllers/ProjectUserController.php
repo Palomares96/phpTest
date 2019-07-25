@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Project_user;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class ProjectUserController extends Controller
 {
@@ -44,7 +45,9 @@ class ProjectUserController extends Controller
     public function create()
     {
         //
-        return view('projectUser.create');
+        $usersModel = DB::table('users')->where('active', '=', '1')->get(['id', 'name']);
+        $projectsModel = DB::table('projects')->where('active', '=', '1')->get(['id', 'name']);
+        return view('projectUser.create', compact('usersModel', 'projectsModel'));
     }
 
     /**
@@ -56,31 +59,21 @@ class ProjectUserController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(
+        $assingment = new Project_user(
             [
-
-                'name' => 'required|string',
-                'email' => 'required|string|email|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-            ]
-        );
-
-        $user = new User(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'active' => true
+                'user_id' => $request->user_id,
+                'project_id' => $request->project_id,
+                'currentlyAssigned' => true
             ]
         );
 
         try {
-            $user->save();
+            $assingment->save();
         } catch (\Exception $e) {
             return response()->json($e->getMessage, 500);
         }
 
-        return redirect('/users')->with('success', 'User saved!');
+        return redirect('/projectUser')->with('success', 'Assingment saved!');
     }
 
     /**
@@ -103,6 +96,10 @@ class ProjectUserController extends Controller
     public function edit($id)
     {
         //
+        $assingment = Project_user::find($id);
+        $usersModel = DB::table('users')->where('active', '=', '1')->get(['id', 'name']);
+        $projectsModel = DB::table('projects')->where('active', '=', '1')->get(['id', 'name']);
+        return view('projectUser.edit', compact('assingment', 'usersModel', 'projectsModel'));
     }
 
     /**
@@ -126,5 +123,9 @@ class ProjectUserController extends Controller
     public function destroy($id)
     {
         //
+        $assingment = Project_user::find($id);
+        $assingment->delete();
+
+        return redirect('/projectUser')->with('success', 'Assingment successfully deleted!');
     }
 }

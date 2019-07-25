@@ -2,7 +2,7 @@
 @section('main')
 <div class="row">
     <div class="col-sm-8 offset-sm-2">
-        <h1 class="display-3">Update project</h1>
+        <h1 class="display-3">Update assignment</h1>
 
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -14,43 +14,41 @@
         </div>
         <br />
         @endif
-        <form method="post" action="{{ route('projects.update', $project->id) }}">
+        <form method="post" action="{{ route('projectUser.update', $assingment->id) }}">
             @method('PATCH')
             @csrf
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" name="name" value="{{ $project->name }}" />
-            </div>
+                <label for="user_id">User name:</label>
+                <select class="form-control m-bot15" name="user_id" selection="{{$assingment->user_id}}">
 
-            <div class="form-group">
-                <label for="desc">Description:</label>
-                <input type="textarea" class="form-control" name="desc" value="{{ $project->desc }}" />
-            </div>
+                    @if ($usersModel->count())
 
+                    @foreach($usersModel as $user)
+                    <option value="{{ $user->id }}" {{ $assingment->user_id == $user->id ? 'selected=selected' : '' }}>{{$user->id}} - {{ $user->name }}</option>
+                    @endforeach
+
+                    @endif
+
+                </select>
+            </div>
             <div class="form-group">
-                <label for="deadline">Deadline:</label>
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" name="deadline" value="{{ $project->deadline }}" />
-                </div>
+                <label for="project_id">Project name:</label>
+                <select class="form-control m-bot15" name="project_id">
+
+                    @if ($projectsModel->count())
+
+                    @foreach($projectsModel as $project)
+                    <option value="{{ $project->id }}" {{ $assingment->project_id == $project->id ? 'selected=selected' : '' }}>{{$project->id}} - {{ $project->name }}</option>
+                    @endforeach
+
+                    @endif
+
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
-    <script>
-        $(function() {
-            $("#datetimepicker1").datetimepicker({
-                format: 'YYYY-MM-DD HH:mm',
-                inline: true,
-                sideBySide: true,
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                }
-            });
-        });
-    </script>
+
 </div>
 @endsection
