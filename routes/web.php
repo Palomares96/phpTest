@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 Route::resource('users', 'UserController');
 Route::resource('projects', 'ProjectController');
-Route::resource('projectUser', 'projectUserController');
+Route::resource('projectUser', 'ProjectUserController');
