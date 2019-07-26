@@ -36,7 +36,11 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->created_at}}</td>
                     <td>{{$user->updated_at}}</td>
-                    <td>{{$user->active}}</td>
+                    @if($user->active)
+                    <td> True </td>
+                    @else
+                    <td> False </td>
+                    @endif
                     <td>
                         <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a>
                     </td>

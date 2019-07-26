@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('base');
 });
 Route::resource('users', 'UserController');
 Route::resource('projects', 'ProjectController');
+Route::resource('projectUser', 'projectUserController');
