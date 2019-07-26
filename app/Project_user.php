@@ -12,13 +12,13 @@ class Project_user extends Model
     protected $fillable = [
         'user_id',
         'project_id',
-        'currentlyAssigned',
+        'currently_assigned',
     ];
 
     protected $table = 'project_user';
 
     public $sortable = [
-        'id', 'user_name', 'project_name', 'deadline', 'is_currentlyAssigned', 'is_active', 'created_at', 'updated_at'
+        'id', 'user_name', 'project_name', 'deadline', 'is_currently_assigned', 'is_active', 'created_at', 'updated_at'
     ];
 
     public function user()
@@ -37,7 +37,7 @@ class Project_user extends Model
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
             ->orderBy('project_user.id', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
 
     protected function userNameSortable($query, $direction)
@@ -47,7 +47,7 @@ class Project_user extends Model
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
             ->orderBy('users.name', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
 
     protected function projectNameSortable($query, $direction)
@@ -57,7 +57,7 @@ class Project_user extends Model
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
             ->orderBy('projects.name', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
 
     protected function deadlineSortable($query, $direction)
@@ -67,7 +67,7 @@ class Project_user extends Model
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
             ->orderBy('projects.deadline', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
 
     protected function createdAtSortable($query, $direction)
@@ -77,7 +77,7 @@ class Project_user extends Model
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
             ->orderBy('project_user.created_at', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
 
     protected function updatedAtSortable($query, $direction)
@@ -87,7 +87,7 @@ class Project_user extends Model
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
             ->orderBy('project_user.updated_at', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
 
     protected function isCurrentlyAssignedSortable($query, $direction)
@@ -96,8 +96,8 @@ class Project_user extends Model
             ->join('users', 'users.id', '=', 'project_user.user_id')
             ->where('users.active', '=', '1')
             ->where('projects.active', '=', '1')
-            ->orderBy('project_user.currentlyAssigned', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
+            ->orderBy('project_user.currently_assigned', $direction)
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.name as user_name', 'users.active as is_active');
     }
     protected function isActiveSortable($query, $direction)
     {
@@ -105,6 +105,6 @@ class Project_user extends Model
             ->join('users', 'users.id', '=', 'project_user.user_id')
             ->where('projects.active', '=', '1')
             ->orderBy('users.active', $direction)
-            ->select('project_user.*', 'project_user.currentlyAssigned as is_currentlyAssigned', 'projects.name as project_name', 'projects.deadline', 'users.active as is_active', 'users.name as user_name');
+            ->select('project_user.*', 'project_user.currently_assigned as is_currently_assigned', 'projects.name as project_name', 'projects.deadline', 'users.active as is_active', 'users.name as user_name');
     }
 }

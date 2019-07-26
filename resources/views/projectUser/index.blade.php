@@ -24,7 +24,7 @@
                     <td>@sortablelink('deadline', 'Deadline')</td>
                     <td>@sortablelink('created_at', 'Created at')</td>
                     <td>@sortablelink('updated_at', 'Updated at')</td>
-                    <td>@sortablelink('is_currentlyAssigned', 'Assigned')</td>
+                    <td>@sortablelink('is_currently_assigned', 'Assigned')</td>
                     <td>@sortablelink('is_active', 'Active')</td>
 
                     <td colspan=2>Actions</td>
@@ -39,7 +39,7 @@
                     <td>{{$assingment->deadline}}</td>
                     <td>{{$assingment->created_at}}</td>
                     <td>{{$assingment->updated_at}}</td>
-                    @if($assingment->is_currentlyAssigned)
+                    @if($assingment->is_currently_assigned)
                     <td> True </td>
                     @else
                     <td> False </td>

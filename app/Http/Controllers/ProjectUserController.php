@@ -63,7 +63,7 @@ class ProjectUserController extends Controller
             [
                 'user_id' => $request->user_id,
                 'project_id' => $request->project_id,
-                'currentlyAssigned' => true
+                'currently_assigned' => true
             ]
         );
 

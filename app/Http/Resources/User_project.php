@@ -19,7 +19,7 @@ class User_project extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'active' => $this->active,
-            'currentlyAssigned' => $this->pivot->currentlyAssigned,
+            'currently_assigned' => $this->pivot->currently_assigned,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'self' => url("/api/users/{$this->id}"),

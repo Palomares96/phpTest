@@ -14,6 +14,6 @@ $factory->define(Project_user::class, function (Faker $faker) {
         //
         'user_id' => $user->id,
         'project_id' => $project->id,
-        'currentlyAssigned' => $faker->boolean(80)
+        'currently_assigned' => $faker->boolean(80)
     ];
 });
